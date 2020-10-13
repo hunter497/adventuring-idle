@@ -1,0 +1,22 @@
+Things To Do
+-----------------------------------
+- Find a way to keep track of skill experience
+- Find a way to keep track of skill levels
+X Begin to set up layout of code
+X Find a way to limit actions 
+- Randomize forage amount based on level, versus always 5
+- Figure out how to handle the story of the game
+- Figure out how to manage hiding and showing new content based on where the player is
+
+Gameplay Loop
+-----------------------------------
+- Start off with foraging
+- Click forage to gather a random amount of food, between 5-10 at level 1
+- Every forage successful forage will give foraging experience
+- Every foraging level will allow for foraging more food per level
+- Eventually can utilize food to entice farmers to automate food production
+- Eventually, can begin to mine minerals (maybe start with copper, iron, etc by level)
+- Mining, and any other task other than foraging, costs food. This will be managed via a hunger stat which can change based on various things.
+- With minerals, can create tools that you can sell, or use to automate mining and foraging more effectively
+- Somehow, unlock other skills that you can use to create more capital, or can use to automate things more effectively
+- As you begin to unlock other skills, and grow to automate further, you build up a village that automates for you

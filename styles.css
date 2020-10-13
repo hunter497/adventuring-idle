@@ -1,0 +1,100 @@
+/* General */
+.button {
+    font-size: 100%;
+    font-family: inherit;
+    border: none;
+}
+
+button.active {
+    background-color: orange;
+    cursor: pointer;
+}
+
+button:disabled {
+    background-color: grey;
+    cursor: not-allowed;
+}
+
+body {
+    width: 800px;
+    margin: auto;
+}
+
+
+/* Navigation */
+nav {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+.title {
+    font-size: x-large;
+    font-weight: bolder;
+}
+
+/* Game Stuff */
+.game {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.flex-panel {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.panel-title {
+    width: 100%;
+    text-align: center;
+    margin: .5em;
+    font-weight: bold;
+    font-size: large;
+}
+
+/* Resources */
+
+.resource-panel {
+    width: 100%;
+    display: flex;
+    margin: 10px;
+    border: solid 2px black;
+    padding: 10px;
+}
+
+.resource {
+    padding-inline-start: .5em;
+}
+
+.resource-amount {
+    color: purple;
+}
+
+/* Main Panel */
+
+.main-panel {
+    width: 440px;
+    border: solid 2px black;
+    justify-content: space-around;
+}
+
+.action-container {
+    width: 200px;
+    height: 80px;
+    border: solid 2px black;
+    text-align: center;
+    padding: 10px;
+    margin: 10px;
+}
+
+/* Log Panel */
+
+.log-panel {
+    width: 300px;
+    height: 500px;
+    border: solid 2px black;
+    padding-left: 15px;
+}
+

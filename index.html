@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventuring Idle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="title">Adventuring Idle - Skills Go Up!!</div>
+    </nav>
+    <div class="game">
+        <div class="resource-panel flex-panel">
+            <span class="panel-title">Resources</span>
+            <div class="resource" id="label-energy">Total Energy</div>
+            <div class="resource" id="label-forage">Total Food</div>
+            <div class="resource" id="label-copper">Total Copper</div>
+        </div>
+        <div class="main-panel flex-panel">
+            <span class="panel-title">ACTIONS</span>
+            <button class="action-container button active" type="button" id="action-forage">
+                FORAGE
+            </button>
+            <button class="action-container button active" type="button" id="action-eat">
+                EAT
+            </button>
+            <button class="action-container button active" type="button" id="action-mine">
+                MINE
+            </button>
+        </div>
+        <div class="log-panel flex-panel" id="log-panel">
+            <span class="panel-title">LOG</span>
+            <div id="log-contents"></div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
