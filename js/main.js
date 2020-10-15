@@ -18,6 +18,7 @@
       }
   
       queueUpdates( numTicks );
+      saveState();
       Render.renderUI(gameState, log);
       MyGame.lastRender = tFrame;
     }
@@ -25,17 +26,8 @@
     function queueUpdates( numTicks ) {
       for(var i=0; i < numTicks; i++) {
         MyGame.lastTick = MyGame.lastTick + MyGame.tickLength; // Now lastTick is this tick.
-        update( MyGame.lastTick );
+        Resources.updateResources(gameState, MyGame.lastTick);
       }
-    };
-
-    // Resource updates
-
-    function update() {
-        gameState.resources.food = gameState.resources.food + gameState.resourceUpdatesPerTick.food;
-        gameState.resources.copper = gameState.resources.copper + gameState.resourceUpdatesPerTick.copper;
-        checkMilestones();
-        saveState();
     };
 
     function setInitialState() {
@@ -43,18 +35,7 @@
         Handlers.setActionHandlers(gameState, log);
     };
 
-    function checkMilestones() {
-        for(let ms in gameState.milestones) {
-            let milestone = gameState.milestones[ms];
-            if (milestone.milestoneMet === false) {
-                milestoneResource = milestone.resource;
-                milestoneCount = milestone.count;
-                if (gameState.resources[milestoneResource] >= milestoneCount) {
-                    milestone.milestoneMet = true;
-                }
-            }
-        }
-    }
+    
 
     //////////////
     // LocalStorage functions
