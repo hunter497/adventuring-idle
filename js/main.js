@@ -1,5 +1,3 @@
-
-// Grabbed this basic game loop from mozilla
 ;(function () {
     let MyGame = new Object();
 
@@ -37,12 +35,12 @@
         gameState.resources.food = gameState.resources.food + gameState.resourceUpdatesPerTick.food;
         gameState.resources.copper = gameState.resources.copper + gameState.resourceUpdatesPerTick.copper;
         checkMilestones();
-        // saveState();
+        saveState();
     };
 
     function setInitialState() {
-        setActionHandlers();
         loadState();
+        Handlers.setActionHandlers(gameState, log);
     };
 
     function checkMilestones() {
@@ -57,41 +55,6 @@
             }
         }
     }
-
-    // Button click handlers
-
-    function setActionHandlers() {
-        // Forage handler
-        var forageAction = document.getElementById('action-forage');
-        forageAction.addEventListener("click", forageHandler);
-
-        // Eating handler
-        var forageAction = document.getElementById('action-eat');
-        forageAction.addEventListener("click", eatingHandler);
-
-        // Mining handler
-        var mineAction = document.getElementById('action-mine');
-        mineAction.addEventListener("click", miningHandler);
-    };
-
-    // Forage handler
-    function forageHandler() {
-        gameState.resources.food = gameState.resources.food + gameState.resourceUpdatesPerClick.food;
-        log.push(`${gameState.resourceUpdatesPerClick.food} food has been added to your stash!`);
-    };
-
-    function eatingHandler() {
-        gameState.resources.food = gameState.resources.food - gameState.resourceUpdatesPerClick.hunger;
-        gameState.resources.energy += gameState.resourceUpdatesPerClick.energy;
-        log.push(`You have consumed ${gameState.resourceUpdatesPerClick.hunger} food and gained ${gameState.resourceUpdatesPerClick.energy} energy!`);
-    };
-
-    // Mining handler
-    function miningHandler() {
-        gameState.resources.copper = gameState.resources.copper + gameState.resourceUpdatesPerClick.copper;
-        gameState.resources.energy -= 5;
-        log.push(gameState.resourceUpdatesPerClick.copper + " copper has been added to your stash!");
-    };
 
     //////////////
     // LocalStorage functions
@@ -120,10 +83,8 @@
             }
         };
     }   
-
-    // Save function
     function saveState() {
-        localStorage.setItem('resources', JSON.stringify(gameState));
+        localStorage.setItem('gameState', JSON.stringify(gameState));
     }
   
     MyGame.lastTick = performance.now();
