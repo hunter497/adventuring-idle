@@ -6,7 +6,11 @@ X Begin to set up layout of code
 X Find a way to limit actions 
 - Randomize forage amount based on level, versus always 5
 - Figure out how to handle the story of the game
-- Figure out how to manage hiding and showing new content based on where the player is
+    - Maybe build out a story pane, similar to the log pane, that will have the story concepts within.
+X Figure out how to manage hiding and showing new content based on where the player is
+- Begin to rip out logic into classes and start unit testing a bit
+- Make foraging cost energy, but gain energy slowly over time as you "rest"
+
 
 Gameplay Loop
 -----------------------------------

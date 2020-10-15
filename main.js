@@ -1,25 +1,14 @@
+class Milestone {
+    constructor(resource, count, milestoneMet) {
+        this.resource = resource;
+        this.count = count;
+        this.milestoneMet = milestoneMet;
+    }
+};
+
 // Grabbed this basic game loop from mozilla
 ;(function () {
     let MyGame = new Object();
-
-    // Current resources, will need to save and load this to localstorage on page load, not on update
-    let resources = {
-        food: 0,
-        energy: 0,
-        copper: 0
-    };
-
-    let resourceUpdatesPerClick = {
-        food: 10,
-        hunger: 5,
-        energy: 3,
-        copper: 5
-    };
-
-    let resourceUpdatesPerTick = {
-        food: 0.0,
-        copper: 0.0
-    };
 
     let log = [];
 
@@ -52,6 +41,13 @@
     // Rendering/UI Updates
 
     function render( tFrame ) {
+        renderResources();
+        renderActions();
+        renderLog();
+        renderActionCheck();
+    };
+
+    function renderResources() {
         // Energy Update
         var forageLabel = document.getElementById('label-energy');
         forageLabel.innerHTML = "Total Energy: <span class='resource-amount'>" + resources.energy + "</span>";
@@ -63,13 +59,24 @@
         // Mining Update
         var miningLabel = document.getElementById('label-copper');
         miningLabel.innerHTML = "Total Copper: <span class='resource-amount'>" + resources.copper + "</span>";
+    }
 
+    function renderActions() {
+        // Render mining action
+        var mineAction = document.getElementById('action-mine');
+        if(milestones.mining.milestoneMet) {
+            mineAction.classList.remove("hidden");
+        }
+    }
+
+    function renderLog() {
         // Render log
-        //TODO: limit to 10 log items shown
         var logPanel = document.getElementById('log-contents');
         let logStatement = log.pop();
-        if (logStatement) { logPanel.innerHTML += "<span class='log-statement'>" + logStatement + "</span><br/>"; }
+        if (logStatement) { logPanel.insertAdjacentHTML("afterbegin", "<span class='log-statement'>" + logStatement + "</span><br/>") };
+    }
 
+    function renderActionCheck() {
         // Check to disable buttons
 
         // Eating check
@@ -87,15 +94,15 @@
         } else {
             mineAction.disabled = false;
         }
-        
-    };
+    }
 
     // Resource updates
 
     function update() {
         resources.food = resources.food + resourceUpdatesPerTick.food;
         resources.copper = resources.copper + resourceUpdatesPerTick.copper;
-        saveState();
+        checkMilestones();
+        // saveState();
     };
 
     function setInitialState() {
@@ -103,6 +110,19 @@
         loadState();
     };
 
+    function checkMilestones() {
+        for(let ms in milestones) {
+            let milestone = milestones[ms];
+            if (milestone.milestoneMet === false) {
+                milestoneResource = milestone.resource;
+                milestoneCount = milestone.count;
+                if (resources[milestoneResource] >= milestoneCount) {
+                    milestone.milestoneMet = true;
+                }
+            }
+            
+        }
+    }
 
     // Button click handlers
 
@@ -159,6 +179,9 @@
             energy: 3,
             copper: 5
         };
+        milestones = JSON.parse(localStorage.getItem('milestones')) || {
+            mining: new Milestone("food", 100, false)
+        };    
         resourceUpdatesPerTick = JSON.parse(localStorage.getItem('resourceUpdatesPerTick')) || {
             food: 0.0,
             copper: 0.0
@@ -168,6 +191,7 @@
     // Save function
     function saveState() {
         localStorage.setItem('resources', JSON.stringify(resources));
+        localStorage.setItem('milestones', JSON.stringify(milestones));
         localStorage.setItem('resourceUpdatesPerClick', JSON.stringify(resourceUpdatesPerClick));
         localStorage.setItem('resourceUpdatesPerTick', JSON.stringify(resourceUpdatesPerTick));
     }

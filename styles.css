@@ -96,5 +96,10 @@ nav {
     height: 500px;
     border: solid 2px black;
     padding-left: 15px;
+    overflow: scroll;
+}
+
+.hidden {
+    display: none;
 }
 
