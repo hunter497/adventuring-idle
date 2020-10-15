@@ -9,8 +9,8 @@ class Resources {
         for(let ms in gameState.milestones) {
             let milestone = gameState.milestones[ms];
             if (milestone.milestoneMet === false) {
-                milestoneResource = milestone.resource;
-                milestoneCount = milestone.count;
+                let milestoneResource = milestone.resource;
+                let milestoneCount = milestone.count;
                 if (gameState.resources[milestoneResource] >= milestoneCount) {
                     milestone.milestoneMet = true;
                 }
