@@ -2,18 +2,34 @@ class Render {
     static renderResources(gameState) {
         // Energy Update
         var forageLabel = document.getElementById('label-energy');
-        forageLabel.innerHTML = "Total Energy: <span class='resource-amount'>" + gameState.resources.energy + "</span>";
+        forageLabel.innerHTML = "Energy: <span class='resource-amount'>" + gameState.resources.energy + "</span>";
 
         // Forage Update
         var forageLabel = document.getElementById('label-forage');
-        forageLabel.innerHTML = "Total Food Foraged: <span class='resource-amount'>" + gameState.resources.food + "</span>";
+        forageLabel.innerHTML = "Food Foraged: <span class='resource-amount'>" + gameState.resources.food + "</span>";
+
+        // Forage Update
+        var woodLabel = document.getElementById('label-wood');
+        woodLabel.innerHTML = "Wood Cut: <span class='resource-amount'>" + gameState.resources.wood + "</span>";
 
         // Mining Update
         var miningLabel = document.getElementById('label-copper');
-        miningLabel.innerHTML = "Total Copper: <span class='resource-amount'>" + gameState.resources.copper + "</span>";
+        miningLabel.innerHTML = "Copper Mined: <span class='resource-amount'>" + gameState.resources.copper + "</span>";
     }
 
     static renderActions(gameState) {
+        // Render eating action
+        var eatAction = document.getElementById('action-eat');
+        if(gameState.milestones.eating.milestoneMet) {
+            eatAction.classList.remove("hidden");
+        }
+
+        // Render woodcutting action
+        var woodcutAction = document.getElementById('action-woodcut');
+        if(gameState.milestones.woodcutting.milestoneMet) {
+            woodcutAction.classList.remove("hidden");
+        }
+
         // Render mining action
         var mineAction = document.getElementById('action-mine');
         if(gameState.milestones.mining.milestoneMet) {
@@ -38,6 +54,14 @@ class Render {
         } else {
             eatAction.disabled = false;
         }        
+
+        // Woodcutting check
+        var woodcutAction = document.getElementById('action-woodcut');
+        if(gameState.resources.energy < 5) {
+            woodcutAction.disabled = true;
+        } else {
+            woodcutAction.disabled = false;
+        }
 
         // Mining check
         var mineAction = document.getElementById('action-mine');

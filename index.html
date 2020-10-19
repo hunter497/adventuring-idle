@@ -8,13 +8,17 @@
 </head>
 <body>
     <nav>
-        <div class="title">Adventuring Idle - Skills Go Up!!</div>
+        <div class="title">Adventuring Idle - Skills Go Up!! 
+            <button class="clear-save" type="button" id="clear-save">Clear Save</button>
+            <button class="save" type="button" id="save">Save Game</button>
+        </div>
     </nav>
     <div class="game">
         <div class="resource-panel flex-panel">
             <span class="panel-title">Resources</span>
             <div class="resource" id="label-energy">Total Energy</div>
             <div class="resource" id="label-forage">Total Food</div>
+            <div class="resource" id="label-wood">Total Wood</div>
             <div class="resource" id="label-copper">Total Copper</div>
         </div>
         <div class="main-panel flex-panel">
@@ -22,8 +26,11 @@
             <button class="action-container button active" type="button" id="action-forage">
                 FORAGE
             </button>
-            <button class="action-container button active" type="button" id="action-eat">
+            <button class="action-container button active hidden" type="button" id="action-eat">
                 EAT
+            </button>
+            <button class="action-container button active hidden" type="button" id="action-woodcut">
+                CUT WOOD
             </button>
             <button class="action-container button active hidden" type="button" id="action-mine">
                 MINE

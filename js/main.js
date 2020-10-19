@@ -18,7 +18,7 @@
       }
   
       queueUpdates( numTicks );
-      saveState();
+      // saveState();
       Render.renderUI(gameState, log);
       MyGame.lastRender = tFrame;
     }
@@ -31,8 +31,8 @@
     };
 
     function setInitialState() {
-        loadState();
-        Handlers.setActionHandlers(gameState, log);
+      loadState();
+      Handlers.setActionHandlers(gameState, log);
     };
 
     
@@ -43,30 +43,36 @@
 
     // Load function, including defaults if nothing set in localstorage
     function loadState() {
-        gameState = JSON.parse(localStorage.getItem('gameState')) || {
-            resources: {
-                food: 0,
-                energy: 0,
-                copper: 0
-            },
-            resourceUpdatesPerClick: {
-                food: 10,
-                hunger: 5,
-                energy: 3,
-                copper: 5
-            },
-            milestones: {
-                mining: new Milestone("food", 100, false)
-            },    
-            resourceUpdatesPerTick: {
-                food: 0.0,
-                copper: 0.0
-            }
-        };
+      gameState = JSON.parse(localStorage.getItem('gameState')) || {
+        resources: {
+          food: 0,
+          energy: 0,
+          wood: 0,
+          copper: 0
+        },
+        resourceUpdatesPerClick: {
+          food: 10,
+          hunger: 5,
+          energy: 3,
+          wood: 3,
+          copper: 5
+        },
+        milestones: {
+          eating: new Milestone("food", 10, false),
+          woodcutting: new Milestone("food", 100, false),
+          mining: new Milestone("wood", 100, false)
+        },    
+        resourceUpdatesPerTick: {
+            food: 0.0,
+            wood: 0.0,
+            energy: 0.0,
+            copper: 0.0
+        }
+      };
     }   
-    function saveState() {
-        localStorage.setItem('gameState', JSON.stringify(gameState));
-    }
+    // function saveState() {
+    //   localStorage.setItem('gameState', JSON.stringify(gameState));
+    // }
   
     MyGame.lastTick = performance.now();
     MyGame.lastRender = MyGame.lastTick; // Pretend the first draw was on first update.
