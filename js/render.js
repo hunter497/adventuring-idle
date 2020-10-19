@@ -47,6 +47,14 @@ class Render {
     static renderActionCheck(gameState) {
         // Check to disable buttons
 
+        // Foraging check
+        var forageAction = document.getElementById('action-forage');
+        if(gameState.resources.energy < 5) {
+            forageAction.disabled = true;
+        } else {
+            forageAction.disabled = false;
+        }
+
         // Eating check
         var eatAction = document.getElementById('action-eat');
         if(gameState.resources.food < gameState.resourceUpdatesPerClick.hunger) {

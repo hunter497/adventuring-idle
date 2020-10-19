@@ -38,6 +38,7 @@ class Handlers {
     // Forage handler
     static forageHandler(gameState, log) {
         gameState.resources.food = gameState.resources.food + gameState.resourceUpdatesPerClick.food;
+        gameState.resources.energy -= 5;
         log.push(`${gameState.resourceUpdatesPerClick.food} food has been added to your stash!`);
     };
 

@@ -1,8 +1,9 @@
 class Resources {
     static updateResources(gameState, lastTick) {
-        gameState.resources.food = gameState.resources.food + gameState.resourceUpdatesPerTick.food;
-        gameState.resources.copper = gameState.resources.copper + gameState.resourceUpdatesPerTick.copper;
-        gameState.resources.wood = gameState.resources.wood + gameState.resourceUpdatesPerTick.wood;
+        gameState.resources.energy += gameState.resourceUpdatesPerTick.energy;
+        gameState.resources.food += gameState.resourceUpdatesPerTick.food;
+        gameState.resources.copper += gameState.resourceUpdatesPerTick.copper;
+        gameState.resources.wood += gameState.resourceUpdatesPerTick.wood;
         Resources.checkMilestones(gameState);
     };
 
