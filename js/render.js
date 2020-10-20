@@ -17,23 +17,32 @@ class Render {
         miningLabel.innerHTML = "Copper Mined: <span class='resource-amount'>" + gameState.resources.copper + "</span>";
     }
 
-    static renderActions(gameState) {
+    static renderActions(gameState, log) {
         // Render eating action
         var eatAction = document.getElementById('action-eat');
-        if(gameState.milestones.eating.milestoneMet) {
+        var eatingMilestone = gameState.milestones.eating;
+        if(eatingMilestone.milestoneMet && !eatingMilestone.milestoneAlert) {
             eatAction.classList.remove("hidden");
+            log.push(eatingMilestone.milestoneMessage);
+            eatingMilestone.milestoneAlert = true;
         }
 
         // Render woodcutting action
         var woodcutAction = document.getElementById('action-woodcut');
-        if(gameState.milestones.woodcutting.milestoneMet) {
+        var woodcutMilestone = gameState.milestones.woodcutting;
+        if(woodcutMilestone.milestoneMet && !woodcutMilestone.milestoneAlert) {
             woodcutAction.classList.remove("hidden");
+            log.push(woodcutMilestone.milestoneMessage);
+            woodcutMilestone.milestoneAlert = true;
         }
 
         // Render mining action
         var mineAction = document.getElementById('action-mine');
-        if(gameState.milestones.mining.milestoneMet) {
+        var miningMilestone = gameState.milestones.mining;
+        if(miningMilestone.milestoneMet && !miningMilestone.milestoneAlert) {
             mineAction.classList.remove("hidden");
+            log.push(miningMilestone.milestoneMessage);
+            miningMilestone.milestoneAlert = true;
         }
     }
 
@@ -82,7 +91,7 @@ class Render {
 
     static renderUI(gameState, log) {
         this.renderResources(gameState);
-        this.renderActions(gameState);
+        this.renderActions(gameState, log);
         this.renderLog(log);
         this.renderActionCheck(gameState);
     };

@@ -2,11 +2,11 @@ class Handlers {
     static setActionHandlers(gameState, log) {
         // Clear Save
         var clearSave = document.getElementById('clear-save');
-        clearSave.addEventListener("click", () => Handlers.clearSave());
+        clearSave.addEventListener("click", () => StateManager.clearSave());
 
         // Save
         var save = document.getElementById('save');
-        save.addEventListener("click", () => Handlers.save(gameState));
+        save.addEventListener("click", () => StateManager.save(gameState));
 
         // Forage handler
         var forageAction = document.getElementById('action-forage');
@@ -24,16 +24,6 @@ class Handlers {
         var mineAction = document.getElementById('action-mine');
         mineAction.addEventListener("click", () => Handlers.miningHandler(gameState, log));
     };
-
-    // Clear save
-    static clearSave() {
-        localStorage.removeItem('gameState');
-    }
-
-    // Save
-    static save(gameState) {
-        localStorage.setItem('gameState', JSON.stringify(gameState));
-    }
 
     // Forage handler
     static forageHandler(gameState, log) {

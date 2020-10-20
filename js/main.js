@@ -54,9 +54,9 @@
           copper: 5
         },
         milestones: {
-          eating: new Milestone("food", 10, false),
-          woodcutting: new Milestone("food", 100, false),
-          mining: new Milestone("wood", 100, false)
+          eating: new Milestone("food", 10, false, "You should probably think about eating some of that food!", false),
+          woodcutting: new Milestone("food", 100, false, "You see a ton of trees all around you. Maybe you should cut some down?", false),
+          mining: new Milestone("wood", 100, false, "That copper looks useful, go ahead and start mining away!", false)
         },    
         resourceUpdatesPerTick: {
           energy: 1.0,
