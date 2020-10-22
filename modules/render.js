@@ -1,26 +1,26 @@
 class Render {
-    static renderResources(gameState) {
+    renderResources(gameState) {
         // Energy Update
-        var forageLabel = document.getElementById('label-energy');
-        forageLabel.innerHTML = "Energy: <span class='resource-amount'>" + gameState.resources.energy + "</span>";
+        let energyLabel = document.getElementById('label-energy');
+        energyLabel.innerHTML = `Energy: <span class='resource-amount'>${gameState.resources.energy}</span>`;
 
         // Forage Update
-        var forageLabel = document.getElementById('label-forage');
-        forageLabel.innerHTML = "Food Foraged: <span class='resource-amount'>" + gameState.resources.food + "</span>";
+        let forageLabel = document.getElementById('label-forage');
+        forageLabel.innerHTML = `Food Foraged: <span class='resource-amount'>${gameState.resources.food}</span>`;
 
         // Forage Update
-        var woodLabel = document.getElementById('label-wood');
-        woodLabel.innerHTML = "Wood Cut: <span class='resource-amount'>" + gameState.resources.wood + "</span>";
+        let woodLabel = document.getElementById('label-wood');
+        woodLabel.innerHTML = `Wood Cut: <span class='resource-amount'>${gameState.resources.wood}</span>`;
 
         // Mining Update
-        var miningLabel = document.getElementById('label-copper');
-        miningLabel.innerHTML = "Copper Mined: <span class='resource-amount'>" + gameState.resources.copper + "</span>";
+        let miningLabel = document.getElementById('label-copper');
+        miningLabel.innerHTML = `Copper Mined: <span class='resource-amount'>${gameState.resources.copper}</span>`;
     }
 
-    static renderActions(gameState, log) {
+    renderActions(gameState, log) {
         // Render eating action
-        var eatAction = document.getElementById('action-eat');
-        var eatingMilestone = gameState.milestones.eating;
+        let eatAction = document.getElementById('action-eat');
+        let eatingMilestone = gameState.milestones.eating;
         if(eatingMilestone.milestoneMet && !eatingMilestone.milestoneAlert) {
             eatAction.classList.remove("hidden");
             log.push(eatingMilestone.milestoneMessage);
@@ -28,8 +28,8 @@ class Render {
         }
 
         // Render woodcutting action
-        var woodcutAction = document.getElementById('action-woodcut');
-        var woodcutMilestone = gameState.milestones.woodcutting;
+        let woodcutAction = document.getElementById('action-woodcut');
+        let woodcutMilestone = gameState.milestones.woodcutting;
         if(woodcutMilestone.milestoneMet && !woodcutMilestone.milestoneAlert) {
             woodcutAction.classList.remove("hidden");
             log.push(woodcutMilestone.milestoneMessage);
@@ -37,8 +37,8 @@ class Render {
         }
 
         // Render mining action
-        var mineAction = document.getElementById('action-mine');
-        var miningMilestone = gameState.milestones.mining;
+        let mineAction = document.getElementById('action-mine');
+        let miningMilestone = gameState.milestones.mining;
         if(miningMilestone.milestoneMet && !miningMilestone.milestoneAlert) {
             mineAction.classList.remove("hidden");
             log.push(miningMilestone.milestoneMessage);
@@ -46,18 +46,18 @@ class Render {
         }
     }
 
-    static renderLog(log) {
+    renderLog(log) {
         // Render log
-        var logPanel = document.getElementById('log-contents');
+        let logPanel = document.getElementById('log-contents');
         let logStatement = log.pop();
-        if (logStatement) { logPanel.insertAdjacentHTML("afterbegin", "<span class='log-statement'>" + logStatement + "</span><br/>") };
+        if (logStatement) { logPanel.insertAdjacentHTML("afterbegin", `<span class='log-statement'>${logStatement}</span><br/>`) };
     }
 
-    static renderActionCheck(gameState) {
+    renderActionCheck(gameState) {
         // Check to disable buttons
 
         // Foraging check
-        var forageAction = document.getElementById('action-forage');
+        let forageAction = document.getElementById('action-forage');
         if(gameState.resources.energy < 5) {
             forageAction.disabled = true;
         } else {
@@ -65,7 +65,7 @@ class Render {
         }
 
         // Eating check
-        var eatAction = document.getElementById('action-eat');
+        let eatAction = document.getElementById('action-eat');
         if(gameState.resources.food < gameState.resourceUpdatesPerClick.hunger) {
             eatAction.disabled = true;
         } else {
@@ -73,7 +73,7 @@ class Render {
         }        
 
         // Woodcutting check
-        var woodcutAction = document.getElementById('action-woodcut');
+        let woodcutAction = document.getElementById('action-woodcut');
         if(gameState.resources.energy < 5) {
             woodcutAction.disabled = true;
         } else {
@@ -81,7 +81,7 @@ class Render {
         }
 
         // Mining check
-        var mineAction = document.getElementById('action-mine');
+        let mineAction = document.getElementById('action-mine');
         if(gameState.resources.energy < 5) {
             mineAction.disabled = true;
         } else {
@@ -89,10 +89,12 @@ class Render {
         }
     }
 
-    static renderUI(gameState, log) {
+    renderUI(gameState, log) {
         this.renderResources(gameState);
         this.renderActions(gameState, log);
         this.renderLog(log);
         this.renderActionCheck(gameState);
     };
 }
+
+export { Render };

@@ -1,34 +1,43 @@
+import { Render } from './modules/render.js';
+import { Resources } from './modules/resources.js';
+import { Handlers } from './modules/handlers.js';
+import { Milestone } from './modules/milestone.js';
+
 ;(function () {
     let MyGame = new Object();
+    let gameState;
+    let renderer = new Render();
+    let resources = new Resources();
+    let handlers = new Handlers();
 
     let log = [];
 
     function main( tFrame ) {
       MyGame.stopMain = window.requestAnimationFrame( main );
-      var nextTick = MyGame.lastTick + MyGame.tickLength;
-      var numTicks = 0;
+      let nextTick = MyGame.lastTick + MyGame.tickLength;
+      let numTicks = 0;
 
       if (tFrame > nextTick) {
-        var timeSinceTick = tFrame - MyGame.lastTick;
+        let timeSinceTick = tFrame - MyGame.lastTick;
         numTicks = Math.floor( timeSinceTick / MyGame.tickLength );
       }
   
       queueUpdates( numTicks );
       // saveState();
-      Render.renderUI(gameState, log);
+      renderer.renderUI(gameState, log);
       MyGame.lastRender = tFrame;
     }
   
     function queueUpdates( numTicks ) {
-      for(var i=0; i < numTicks; i++) {
+      for(let i=0; i < numTicks; i++) {
         MyGame.lastTick = MyGame.lastTick + MyGame.tickLength;
-        Resources.updateResources(gameState, MyGame.lastTick);
+        resources.updateResources(gameState, MyGame.lastTick);
       }
     };
 
     function setInitialState() {
       loadState();
-      Handlers.setActionHandlers(gameState, log);
+      handlers.setActionHandlers(gameState, log);
     };
 
     
@@ -66,13 +75,10 @@
         }
       };
     }   
-    // function saveState() {
-    //   localStorage.setItem('gameState', JSON.stringify(gameState));
-    // }
   
     MyGame.lastTick = performance.now();
     MyGame.lastRender = MyGame.lastTick; // Pretend the first draw was on first update.
-    MyGame.tickLength = 1000; // This sets your simulation to run at 20Hz (50ms)
+    MyGame.tickLength = 1000; // This sets your simulation to run at 1000Hz (1s)
     
     setInitialState();
     main(performance.now()); // Start the cycle

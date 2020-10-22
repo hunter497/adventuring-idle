@@ -7,3 +7,5 @@ class Milestone {
         this.milestoneAlert = milestoneAlert;
     }
 };
+
+export { Milestone };

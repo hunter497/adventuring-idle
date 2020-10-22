@@ -1,13 +1,13 @@
 class Resources {
-    static updateResources(gameState, lastTick) {
+    updateResources(gameState, lastTick) {
         gameState.resources.energy += gameState.resourceUpdatesPerTick.energy;
         gameState.resources.food += gameState.resourceUpdatesPerTick.food;
         gameState.resources.copper += gameState.resourceUpdatesPerTick.copper;
         gameState.resources.wood += gameState.resourceUpdatesPerTick.wood;
-        Resources.checkMilestones(gameState);
+        this.checkMilestones(gameState);
     };
 
-    static checkMilestones(gameState) {
+    checkMilestones(gameState) {
         for(let ms in gameState.milestones) {
             let milestone = gameState.milestones[ms];
             if (milestone.milestoneMet === false) {
@@ -20,3 +20,5 @@ class Resources {
         }
     }
 }
+
+export { Resources };
